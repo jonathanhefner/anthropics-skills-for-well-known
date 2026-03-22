@@ -1,5 +1,5 @@
 {
-  "name": "jonathanhefner-anthropics-skills",
+  "name": "anthropics-skills",
   "compatibility_date": "2026-03-22",
   "assets": { "directory": "./public" }
 }
