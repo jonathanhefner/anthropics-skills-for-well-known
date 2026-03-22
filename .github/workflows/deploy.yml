@@ -20,9 +20,10 @@ jobs:
           skills: ./skills
           output: ./public/.well-known/agent-skills
 
+      - run: npm install wrangler@4
+
       - uses: cloudflare/wrangler-action@v3
         with:
-          wranglerVersion: "4.76.0"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
