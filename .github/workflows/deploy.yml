@@ -1,0 +1,27 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: jonathanhefner/agentskills-build-for-well-known
+          token: ${{ secrets.GH_PAT }}
+          path: ./.github/actions/build-for-well-known
+
+      - uses: ./.github/actions/build-for-well-known
+        with:
+          skills: ./skills
+          output: ./public/.well-known/agent-skills
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
